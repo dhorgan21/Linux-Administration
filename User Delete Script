@@ -1,0 +1,5 @@
+#!/bin/bash
+#userdel -r username
+while IFS= read -r line; do 
+  sudo userdel -r $line
+done < unames.txt
