@@ -1,0 +1,29 @@
+1: sed 's/Jon/Jonathan/g' datebook.txt
+
+2: sed '1,3d' datebook.txt
+
+3: sed -n '5,10p' datebook.txt
+
+4: sed '/Lane/d' datebook.txt
+
+5: sed -rn '/.*:.*:.*:(11|12).*:/p' datebook.txt
+
+#sed -r '/^(Fred.*\0)/ s/^(Fred.*\0)/\1***/' datebook.txt
+#sed -r 's/^(Fred.*\0)/\1***/' datebook.txt
+#sed -r 's/^(Fred.*0)/\1***/' datebook.txt BELOW HERE REQUIRES CONVERSION TO UNIX FILETYPE 
+#sed -r 's/^Fred.*/&***/' datebook.txt
+#sed -r 's/^(Fred.*)\0/\1***/' datebook.txt ALTERNATIVE VERSION OF COMMAND BELOW
+#sed -r 's/(^Fred.*)\0/\1***/' datebook.txt WORKS, BUT LESS ROBUST THAN BELOW
+#sed -r 's/^(Fred.*)$/\1***/' datebook.txt WORKS AFTER RUNNING SED OR AWK COMMAND BELOW
+6: sed-r '/^Fred/s|$|***|' datebook.txt WORKS BETTER THAN ABOVE
+
+7: sed -r 's/Jose.*/Jose Has Retired/' datebook.txt
+
+#awk '{ sub("\r$", "" ); print }' datebook.txt > datebook.txt RUN THIS COMMAND BEFORE DOING THE LAB
+#sed -r 's/\r//' datebook.txt > datebook.txt SED VERSION OF ABOVE COMMAND
+
+8: sed -r '/Popeye/s|[0-9]+/[0-9]+/[0-9]+|11/14/46|' datebook.txt FINISHED. 
+#\d DOES NOT WORK WITH THIS VERSION OF SED, NUMBERS MUST BE REPRESENTED BY [0-9]
+
+9: THERE ARE NO BLANK LINES IN THE FILE
+sed -r '/^Fred/s/$/***/' datebook.txt
