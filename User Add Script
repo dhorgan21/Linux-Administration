@@ -1,0 +1,56 @@
+#!/bin/bash
+#File is a bash script
+
+#Prompt the user for the group name and initializes a counter for uid numbers
+read -p "What group would you like to add users to? " usergroup
+i=1002
+
+#sanitizes names in file and reduces them to 15 characters or less and stores the output in a file
+awk '{gsub(" ", ""); gsub("\r", ""); gsub("-", ""); print tolower($0) }' ./UserNamesLvl2.txt | cut -c -15 > unames.txt
+
+
+
+#Admin loop, will be converting these sections to functions later
+if [ $usergroup == "admin" ]; then
+#while there are still lines in the file, add users using info from the sanitized username files and increment the counter for the uid
+  while IFS= read -r line; do
+    sudo useradd -m -d /home/admin/$line -k /etc/adminskel -G admin,sudoers -u $i $line
+    ((i++))
+  done < ./unames.txt
+
+
+#Temp loop
+elif [ $usergroup = "temp" ]; then
+  while IFS= read -r line; do
+    sudo useradd -m -d /home/temp/$line -k /etc/tempskel -g temp -u $i $line
+    #set quota for temp user
+    ((i++))
+  done < ./unames.txt
+
+
+#Staff loop
+elif [ $usergroup = "staff" ]; then
+  while IFS= read -r line; do 
+    sudo useradd -m -d /home/staff/$line -k /etc/staffskel -g staff -u $i $line
+    ((i++))
+  done < ./unames.txt
+
+
+#Developer loop
+elif [ $usergroup = "developers" ]; then
+  while IFS= read -r line; do
+    sudo useradd -m -d /home/developers/$line -k /etc/developersskel -s /bin/tcsh -g developers -u $i $line
+    ((i++))
+  done < ./unames.txt
+
+
+#Error checking
+else
+  echo "An incorrect user group was specified"
+  exit 1;
+fi
+
+
+
+
+
