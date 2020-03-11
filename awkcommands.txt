@@ -1,0 +1,25 @@
+Lab3
+awk 'BEGIN{FS=":"} {print $2}' lab3.data
+awk 'BEGIN{FS=":"} /Dan/ {print $2'} lab3.data
+awk 'BEGIN{FS=":"} /Susan/ {print $1 " " $2}' lab3.data
+awk '/^\w+ (D\w+)/ {print substr($2, 0, 7)}' lab3.data
+awk '/^[CE]+/ {print $1}' lab3.data
+awk '/^\w{4} / {print $1}' lab3.data
+awk '/^\w+ \w+:\(916\)/ {print $1}' lab3.data
+awk 'BEGIN{FS=":"} /Mike/ {print "$"$3, "$"$4, "$"$5}' lab3.data
+awk '{sub(/[[:punct:]]+[[:digit:]]+[[:punct:]]/, ""); print $2",", $1}' lab3.data
+
+
+
+Lab4
+awk 'BEGIN{FS=":"} {if($4 > 100) {print $1}}' lab4.data
+awk 'BEGIN{FS=":"} {if($5 < 85) {print $1 $2}}' lab4.data
+awk 'BEGIN{FS=":"} {if($3 >= 75 && $3 <= 150) {print $1}}' lab4.data
+awk 'BEGIN{FS=":"} {if(($3 + $4 + $5) < 800) {print $1}}' lab4.data
+awk 'BEGIN{FS=":"} {if((($3 + $4 +$5) / 3) > 200) {print $1}}' lab4.data
+awk 'BEGIN{FS=":"} {if
+awk 'BEGIN{FS=":| "} {if($3 !~ /916/) {print $1}}' lab4.data
+awk '{print NR, $0}' lab4.data
+awk 'BEGIN{FS=":"} {contribution = ($3 + $4 + $5)} {print $1" contributed: $" contribution}' lab4.data
+awk 'BEGIN{FS=":"} /chet/ {$4 += 10}' lab4.data
+awk '{gsub(/Nancy McNeil/, "Louise McInnis")}' lab4.data
