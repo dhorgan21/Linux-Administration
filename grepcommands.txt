@@ -1,0 +1,11 @@
+cat datebook2 | grep San
+cat datebook2 | grep -E '^J'
+cat datebook2 | grep -E '700$'
+cat datebook2 | grep -v 834
+grep /12/ datebook2
+grep :408- datebook2
+grep '[A-Z][a-z]{4}, [A-Z]' datebook2
+grep '[A-Z]+ Kk' datebook2
+grep -E '[[:upper:]][[:lower:]]+ [Kk]' datebook2
+grep -E -A 1 '[0-9]{6}$' datebook2
+grep '[Ll]incoln' datebook2
