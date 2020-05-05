@@ -1,0 +1,5 @@
+#!/bin/bash
+today=`date '+%Y_%m_%d_%H_%M_%S'`
+#creates variable that contains the date and time to include in the backup name
+sudo iptables-save > iptables_backups/backup_$today
+#saves iptables in the folder iptables_backups

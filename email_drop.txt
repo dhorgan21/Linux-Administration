@@ -1,0 +1,5 @@
+#!/bin/bash
+sudo iptables -A INPUT -p tcp --dport 25 -j DROP
+sudo iptable -A INPUT -p tcp --dport 110 -j DROP
+#first line drops smtp packets and second drops pop3 packets. didnt set up rules for outbound
+#emails because I'm the only one with access to the server and I'm not using email.

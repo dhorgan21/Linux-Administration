@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo iptables -I INPUT -p tcp --dport 22 -j DROP
+#drops incoming ssh traffic

@@ -1,0 +1,33 @@
+#!/bin/bash
+#script to block specific hosts/macs, block telnet, and block pings
+#loop to block ip addresses
+answer="y"
+while [ $answer == "y" -o $answer == "Y" ]; do
+  read -p "would you like to block an ip?" answer
+  if [ $answer == "y" -o $answer == "Y" ]; then
+    read -p "what is the ip?" ip_address
+    sudo iptables -I INPUT -s $ip_address -j DROP
+  fi
+done 
+
+#loop to block mac addresses
+answer="y"
+while [ $answer == "y" -o $answer == "Y" ]; do
+  read -p "would you like to block a mac address?" answer
+  if [ $answer == "y" -o $answer == "Y" ]; then
+    read -p "what is the mac?" mac_address
+    sudo iptables -I INPUT -m mac --mac-source $mac_address -j DROP
+  fi
+done
+
+#Block telnet?
+read -p "would you like to block telnet access to the server?" answer
+if [ $answer == "y" -o $answer == "Y" ]; then 
+  sudo iptables -I INPUT -p tcp --dport 23 -j DROP
+fi
+
+#Block ping?
+read -p "would you like to block icmp requests to the server?" answer
+if [ $answer == "y" -o $answer == "Y" ]; then 
+  sudo iptables -I INPUT -p icmp --icmp-type echo-request -j DROP
+fi

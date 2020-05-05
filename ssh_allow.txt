@@ -1,0 +1,5 @@
+#!/bin/bash
+#allows ssh traffic into the server from my device
+sudo iptables -I INPUT -p tcp --dport 22 -s 192.168.1.243 -j ACCEPT
+#allows ssh traffic out of the server to my device
+sudo iptables -I OUTPUT -p tcp --dport 22 -s 192.168.1.243 -j ACCEPT
